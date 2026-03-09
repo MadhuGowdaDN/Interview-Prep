@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@common/*": [
+                "src/common/*"
+            ],
+            "@icons/*": [
+                "src/common/icons/*"
+            ],
+            "@features/*": [
+                "src/features/*"
+            ],
+            "@constants/*": [
+                "src/constants/*"
+            ],
+            "@theme/*": [
+                "src/theme/*"
+            ],
+            "@store/*": [
+                "src/store/*"
+            ],
+            "@assets/*": [
+                "src/assets/*"
+            ],
+            "@routes/*": [
+                "src/routes/*"
+            ]
+        }
+    },
+    "include": [
+        "src"
+    ]
+}
