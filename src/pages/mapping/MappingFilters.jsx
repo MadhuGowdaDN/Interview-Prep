@@ -1,12 +1,11 @@
-import React from 'react';
 import {
-    Grid,
+    Button,
     FormControl,
+    Grid,
     InputLabel,
-    Select,
     MenuItem,
-    TextField,
-    Button
+    Select,
+    TextField
 } from '@common/mui';
 
 const MappingFilters = ({ filters, onFilterChange }) => {

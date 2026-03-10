@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Box, Typography, Paper, Tabs, Tab } from '@common/mui';
+import { Box, Paper, Tab, Tabs, Typography } from '@common/mui';
+import { clearError, createAssessment, generateAssessmentAi } from '@features/assessments/assessmentSlice';
 import { AiIcon, BuildIcon } from '@icons';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createAssessment, generateAssessmentAi, clearError } from '@features/assessments/assessmentSlice';
+import { useNavigate } from 'react-router-dom';
 import AIGenerator from './components/AIGenerator';
 import ManualBuilder from './components/ManualBuilder';
 

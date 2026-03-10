@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, IconButton } from '@common/mui';
-import { AddIcon, EditIcon, DeleteIcon } from '@icons';
 import DynamicTable from '@common/components/DynamicTable';
-import { Button } from '@common/mui';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Box, Button, IconButton, Typography } from '@common/mui';
 import { getAssessments } from '@features/assessments/assessmentSlice';
+import { AddIcon, DeleteIcon, EditIcon } from '@icons';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const AssessmentList = () => {
     const navigate = useNavigate();

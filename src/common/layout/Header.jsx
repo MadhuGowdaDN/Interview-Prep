@@ -1,6 +1,5 @@
-import React from 'react';
-import { Box, IconButton, Typography, Toolbar, AppBar as MuiAppBar, Avatar, Badge, InputBase, alpha } from '@common/mui';
-import { MenuIcon, NotificationsIcon, SearchIcon, ArrowDownIcon } from '@icons';
+import { Avatar, Badge, Box, IconButton, InputBase, AppBar as MuiAppBar, Toolbar, Typography, alpha } from '@common/mui';
+import { ArrowDownIcon, MenuIcon, NotificationsIcon, SearchIcon } from '@icons';
 
 const Header = ({ sidebarWidth, toggleSidebar }) => {
     return (

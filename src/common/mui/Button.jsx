@@ -1,5 +1,4 @@
-import React from 'react';
-import { Button as MuiButton, CircularProgress } from '@mui/material';
+import { CircularProgress, Button as MuiButton } from '@mui/material';
 
 const Button = ({ children, loading, disabled, startIcon, endIcon, variant = 'contained', color = 'primary', ...props }) => {
     return (

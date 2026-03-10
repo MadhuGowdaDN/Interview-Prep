@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import { Box, Typography, Container, Paper, Alert } from '@common/mui';
-import { FormWrapper } from '@common/mui';
 import DynamicForm from '@common/components/DynamicForm';
-import * as Yup from 'yup';
+import { Alert, Box, Container, FormWrapper, Paper, Typography } from '@common/mui';
+import { clearError, clearSuccess, register } from '@features/auth/authSlice';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { register, clearError, clearSuccess } from '@features/auth/authSlice';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 
 const REGISTER_SCHEMA = [
     {

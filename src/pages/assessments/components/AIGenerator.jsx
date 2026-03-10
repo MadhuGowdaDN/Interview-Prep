@@ -1,9 +1,7 @@
-import React from 'react';
-import { Box, Typography, Alert } from '@common/mui';
-import { FormWrapper } from '@common/mui';
 import DynamicForm from '@common/components/DynamicForm';
-import * as Yup from 'yup';
+import { Alert, Box, FormWrapper, Typography } from '@common/mui';
 import { AiIcon } from '@icons';
+import * as Yup from 'yup';
 
 const AI_SCHEMA = [
     { name: 'topic', label: 'Topic (e.g., React JS)', type: 'text', gridProps: { sm: 12 } },

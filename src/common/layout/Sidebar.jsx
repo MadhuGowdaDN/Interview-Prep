@@ -1,6 +1,6 @@
-import React from 'react';
 import {
     Box,
+    Divider,
     Drawer,
     List,
     ListItem,
@@ -8,10 +8,9 @@ import {
     ListItemIcon,
     ListItemText,
     Typography,
-    Divider,
 } from '@common/mui';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { DashboardIcon, AssignmentIcon, MapIcon, PlayIcon } from '@icons';
+import { AssignmentIcon, DashboardIcon, MapIcon, PlayIcon } from '@icons';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const NAVIGATION = [
     { text: 'Overview', icon: <DashboardIcon />, path: '/' },

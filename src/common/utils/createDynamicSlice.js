@@ -1,6 +1,5 @@
 // src/common/utils/createDynamicSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import apiClient from "./apiClient";
 
 // Common API call function

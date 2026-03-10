@@ -1,45 +1,42 @@
-import React, { useState, useEffect } from 'react';
 import {
+    Alert,
+    Avatar,
     Box,
-    Typography,
-    Paper,
-    Grid,
+    Button,
     Card,
     CardContent,
-    Divider,
-    Button,
-    IconButton,
     Chip,
-    Stack,
-    Avatar,
-    LinearProgress,
-    Alert,
-    Snackbar,
+    CircularProgress,
     Dialog,
-    DialogTitle,
+    DialogActions,
     DialogContent,
     DialogContentText,
-    DialogActions,
+    DialogTitle,
+    Divider,
+    Grid,
+    IconButton,
+    LinearProgress,
+    Snackbar,
+    Stack,
     Tab,
-    Tabs,
     Table,
     TableBody,
     TableCell,
     TableContainer,
     TableHead,
     TableRow,
+    Tabs,
     Tooltip,
-    CircularProgress
+    Typography
 } from '@common/mui';
-import { ArrowBackIcon, EditIcon, DeleteIcon, PlayIcon, AssessmentIcon, PersonIcon, CalendarIcon, AccessTimeIcon, CheckCircleIcon, CancelIcon, RefreshIcon, EmailIcon } from '@icons';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { formatDate } from '@common/utils/dateUtils';
 import {
     getMappingDetails,
-    // deleteMapping,
-    // updateMapping
 } from '@features/mapping/mappingSlice';
-import { formatDate } from '@common/utils/dateUtils';
+import { AccessTimeIcon, ArrowBackIcon, AssessmentIcon, CalendarIcon, CancelIcon, CheckCircleIcon, DeleteIcon, EditIcon, EmailIcon, PersonIcon, PlayIcon, RefreshIcon } from '@icons';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import StatusChip from './StatusChip';
 
 // Tab Panel Component

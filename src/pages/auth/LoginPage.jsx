@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import { Box, Typography, Container, Paper, Alert } from '@common/mui';
-import { FormWrapper } from '@common/mui';
 import DynamicForm from '@common/components/DynamicForm';
-import * as Yup from 'yup';
+import { Alert, Box, Container, FormWrapper, Paper, Typography } from '@common/mui';
+import { clearError, login } from '@features/auth/authSlice';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, clearError } from '@features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 
 const LOGIN_SCHEMA = [
     {

@@ -1,6 +1,5 @@
-import React from 'react';
-import { Box, Typography, Grid, Paper, Card, CardContent } from '@common/mui';
-import { PeopleIcon, AssessmentIcon, TrendingUpIcon, TimelineIcon } from '@icons';
+import { Box, Card, CardContent, Grid, Paper, Typography } from '@common/mui';
+import { AssessmentIcon, PeopleIcon, TimelineIcon, TrendingUpIcon } from '@icons';
 
 const StatCard = ({ title, value, icon, color }) => (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>

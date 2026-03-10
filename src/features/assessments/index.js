@@ -1,5 +1,4 @@
 export {
-    getAssessments, getAssessmentById, createAssessment, generateAssessmentAi,
-    clearCurrentAssessment, clearError, clearSuccess,
+    clearCurrentAssessment, clearError, clearSuccess, createAssessment, generateAssessmentAi, getAssessmentById, getAssessments
 } from "./assessmentSlice";
 

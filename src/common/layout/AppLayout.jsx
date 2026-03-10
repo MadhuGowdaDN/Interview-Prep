@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { Box, CssBaseline, Toolbar } from '@common/mui';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';

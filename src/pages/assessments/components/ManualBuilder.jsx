@@ -1,9 +1,6 @@
-import React from 'react';
-import { Box, Typography, Paper, Grid, IconButton, Divider, MenuItem, Button as MuiButton } from '@common/mui';
-import { Formik, Form, FieldArray } from 'formik';
+import { Box, Button, Divider, Grid, IconButton, MenuItem, Button as MuiButton, Paper, TextField, Typography } from '@common/mui';
+import { FieldArray, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { TextField, Button } from '@common/mui';
-import { DeleteOutlineIcon, AddCircleOutlineIcon } from '@icons';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required'),

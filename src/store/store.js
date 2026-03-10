@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import authReducer from '@features/auth/authSlice';
 import assessmentReducer from '@features/assessments/assessmentSlice';
+import authReducer from '@features/auth/authSlice';
 import mappingReducer from '@features/mapping/mappingSlice';
 import prepareReducer from '@features/prepare/prepareSlice';
 

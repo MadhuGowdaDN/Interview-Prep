@@ -1,6 +1,5 @@
-import React from 'react';
+import { Paper } from '@common/mui';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { Box, Paper } from '@common/mui';
 
 const DynamicTable = ({
     rows = [],

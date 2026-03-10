@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, Paper, RadioGroup, FormControlLabel, Radio, Divider } from '@common/mui';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Button } from '@common/mui';
+import { Box, Button, Divider, FormControlLabel, Paper, Radio, RadioGroup, Typography } from '@common/mui';
+import { clearTimeData, getPrepareTime, submitAnswer, submitAssessment } from '@features/prepare/prepareSlice';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPrepareTime, submitAnswer, submitAssessment, clearTimeData } from '@features/prepare/prepareSlice';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const PrepareAssessment = () => {
     const [searchParams] = useSearchParams();

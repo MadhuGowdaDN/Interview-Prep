@@ -1,38 +1,33 @@
-import React, { useState, useEffect } from 'react';
 import {
-    Box,
-    Typography,
-    Paper,
-    Grid,
-    TextField,
-    Button,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    FormHelperText,
     Alert,
-    Snackbar,
-    Stepper,
-    Step,
-    StepLabel,
+    Autocomplete,
+    Box,
+    Button,
     Card,
     CardContent,
-    Divider,
-    IconButton,
-    Autocomplete,
     Chip,
-    Stack,
+    Divider,
+    FormControl,
+    Grid,
+    IconButton,
     InputAdornment,
-    DialogTitle,
-    DialogContent,
-    DialogContentText,
-    DialogActions,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Snackbar,
+    Stack,
+    Step,
+    StepLabel,
+    Stepper,
+    TextField,
+    Typography
 } from '@common/mui';
-import { ArrowBackIcon, SaveIcon, PersonIcon, AssessmentIcon, CheckCircleIcon } from '@icons';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { createMapping } from '@features/mapping/mappingSlice';
+import { ArrowBackIcon, AssessmentIcon, PersonIcon, SaveIcon } from '@icons';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // Mock data for users and assessments (replace with actual API calls)
 const MOCK_USERS = [

@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from 'react';
-import { createBrowserRouter, Navigate } from 'react-router-dom';
 import AppLayout from '@common/layout/AppLayout';
+import { Box, CircularProgress } from '@common/mui';
+import { lazy, Suspense } from 'react';
+import { createBrowserRouter } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
-import { CircularProgress, Box } from '@common/mui';
 
 // Load directly from pages
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'));

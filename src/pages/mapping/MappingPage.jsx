@@ -1,26 +1,20 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import DynamicTable from '@common/components/DynamicTable';
 import {
     Box,
-    Typography,
     Button,
-    Chip,
-    Tooltip,
+    Grid,
     IconButton,
-    Paper,
-    TextField,
     InputAdornment,
+    Paper,
     Stack,
-    MenuItem,
-    FormControl,
-    InputLabel,
-    Select,
-    Grid
+    TextField,
+    Typography
 } from '@common/mui';
-import { PlayIcon, ViewIcon, AddIcon, SearchIcon, FilterIcon, RefreshIcon } from '@icons';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import DynamicTable from '@common/components/DynamicTable';
 import { getMappings } from '@features';
+import { AddIcon, FilterIcon, PlayIcon, RefreshIcon, SearchIcon, ViewIcon } from '@icons';
+import { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import MappingFilters from './MappingFilters';
 import StatusChip from './StatusChip';
 

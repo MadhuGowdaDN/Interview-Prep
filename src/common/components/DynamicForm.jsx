@@ -1,8 +1,7 @@
-import React from 'react';
-import { Grid, Box, MenuItem } from '@common/mui';
-import TextField from '../mui/TextField';
+import { Box, Grid, MenuItem } from '@common/mui';
 import Autocomplete from '../mui/Autocomplete';
 import Button from '../mui/Button';
+import TextField from '../mui/TextField';
 
 // Dynamic form generator that accepts a schema array
 const DynamicForm = ({
