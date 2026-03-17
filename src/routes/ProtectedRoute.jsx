@@ -1,15 +1,17 @@
+import { isUserLoggedIn } from '@features/auth';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
 
 const ProtectedRoute = ({ children }) => {
     const location = useLocation();
+    const dispatch = useDispatch();
+    const { isAuthenticated } = useSelector((state) => state.auth);
 
-    // In a real app, you'd select this from Redux state:
-    // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    useEffect(() => {
+        dispatch(isUserLoggedIn());
+    }, []);
 
-    // For now, checking localStorage for simplicity
-    const isAuthenticated = !!localStorage.getItem('accessToken');
-    console.log("isAuthenticated ", isAuthenticated)
     if (!isAuthenticated) {
         // Redirect them to the /login page, but save the current location they were
         // trying to go to when they were redirected. This allows us to send them

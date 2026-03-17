@@ -1,9 +1,10 @@
-<<<<<<< HEAD
 import { createDynamicSlice } from '@common/utils/createDynamicSlice';
 import { API_ROUTES } from '@constants';
 const { CURD_ASSESSMENT,
     GET_ASSESSMENT_DETAILS,
-    GENERATE_ASSESSMENT_AI, } = API_ROUTES.ASSESSMENT;
+    GENERATE_ASSESSMENT_AI,
+    UPDATE_ASSESSMENT, DELETE_ASSESSMENT, ADD_QUESTION, UPDATE_QUESTION, DELETE_QUESTION
+} = API_ROUTES.ASSESSMENT;
 
 const assessmentSliceConfig = {
     name: 'assessments',
@@ -35,68 +36,30 @@ const assessmentSliceConfig = {
             method: 'post',
             url: GENERATE_ASSESSMENT_AI,
         },
-    ],
-    reducers: {
-        clearCurrentAssessment: (state) => {
-            state.details = null;
-        },
-    },
-    extraReducers: (builder, thunks) => {
-        builder.addCase(thunks.getAssessments.fulfilled, (state, action) => {
-            state.loading = false;
-            // Assume API returns { items: [], total: 0 } or just an array
-            if (action.payload?.items) {
-                state.list = action.payload.items;
-                state.totalCount = action.payload.total || action.payload.items.length;
-            } else if (Array.isArray(action.payload)) {
-                state.list = action.payload;
-                state.totalCount = action.payload.length;
-            }
-        });
-    }
-};
-
-const { reducer, thunks, actions } = createDynamicSlice(assessmentSliceConfig);
-
-export const { getAssessments, getAssessmentById, createAssessment, generateAssessmentAi } = thunks;
-export const { clearCurrentAssessment, clearError, clearSuccess } = actions;
-export default reducer;
-=======
-import { createDynamicSlice } from '@common/utils/createDynamicSlice';
-import { API_ROUTES } from '@constants';
-const { CURD_ASSESSMENT,
-    GET_ASSESSMENT_DETAILS,
-    GENERATE_ASSESSMENT_AI, } = API_ROUTES.ASSESSMENT;
-
-const assessmentSliceConfig = {
-    name: 'assessments',
-    initialState: {
-        list: [],
-        details: null,
-        totalCount: 0,
-    },
-    asyncThunks: [
         {
-            name: 'getAssessments',
-            method: 'get',
-            url: CURD_ASSESSMENT,
-            customExtraReducer: true,
+            name: 'updateAssessment',
+            method: 'put',
+            url: UPDATE_ASSESSMENT,
         },
         {
-            name: 'getAssessmentById',
-            method: 'get',
-            url: GET_ASSESSMENT_DETAILS,
-            storeKey: 'details',
+            name: 'deleteAssessment',
+            method: 'delete',
+            url: DELETE_ASSESSMENT,
         },
         {
-            name: 'createAssessment',
+            name: 'addQuestion',
             method: 'post',
-            url: CURD_ASSESSMENT,
+            url: ADD_QUESTION,
         },
         {
-            name: 'generateAssessmentAi',
-            method: 'post',
-            url: GENERATE_ASSESSMENT_AI,
+            name: 'updateQuestion',
+            method: 'put',
+            url: UPDATE_QUESTION,
+        },
+        {
+            name: 'deleteQuestion',
+            method: 'delete',
+            url: DELETE_QUESTION,
         },
     ],
     reducers: {
@@ -121,7 +84,6 @@ const assessmentSliceConfig = {
 
 const { reducer, thunks, actions } = createDynamicSlice(assessmentSliceConfig);
 
-export const { getAssessments, getAssessmentById, createAssessment, generateAssessmentAi } = thunks;
+export const { getAssessments, getAssessmentById, createAssessment, generateAssessmentAi, updateAssessment, deleteAssessment, addQuestion, updateQuestion, deleteQuestion } = thunks;
 export const { clearCurrentAssessment, clearError, clearSuccess } = actions;
 export default reducer;
->>>>>>> ee5e1b88d886f63883d81d95ed95ffc614e4fb42

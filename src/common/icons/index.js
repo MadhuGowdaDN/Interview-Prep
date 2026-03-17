@@ -1,5 +1,9 @@
 // Export all used icons centrally to support the @icons path alias
 
+export {
+    ExitToApp as ExitToAppIcon, FullscreenExit as FullscreenExitIcon, Fullscreen as FullscreenIcon, NavigateBefore as NavigateBeforeIcon,
+    NavigateNext as NavigateNextIcon
+} from '@mui/icons-material';
 export { default as AccessTimeIcon } from '@mui/icons-material/AccessTime';
 export { default as AccountCircleIcon } from '@mui/icons-material/AccountCircle';
 export { default as AddIcon } from '@mui/icons-material/Add';
@@ -10,6 +14,7 @@ export { default as AssessmentIcon } from '@mui/icons-material/Assessment';
 export { default as AssignmentIcon } from '@mui/icons-material/Assignment';
 export { default as AutoAwesomeIcon } from '@mui/icons-material/AutoAwesome';
 export { default as BuildIcon } from '@mui/icons-material/Build';
+export { default as CalendarIcon } from '@mui/icons-material/CalendarMonth';
 export { default as CalendarTodayIcon } from '@mui/icons-material/CalendarToday';
 export { default as CancelIcon } from '@mui/icons-material/Cancel';
 export { default as CheckCircleIcon } from '@mui/icons-material/CheckCircle';
@@ -38,6 +43,7 @@ export { default as ScoreIcon } from '@mui/icons-material/Score';
 export { default as Search, default as SearchIcon } from '@mui/icons-material/Search';
 export { default as SettingsIcon } from '@mui/icons-material/Settings';
 export { default as ShareIcon } from '@mui/icons-material/Share';
+export { default as AiIcon } from '@mui/icons-material/SmartToy';
 export { default as StartedIcon } from '@mui/icons-material/Start';
 export { default as CompletedIcon } from '@mui/icons-material/TaskAlt';
 export { default as TimelineIcon } from '@mui/icons-material/Timeline';

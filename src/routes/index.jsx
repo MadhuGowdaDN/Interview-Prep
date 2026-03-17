@@ -10,7 +10,10 @@ const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'));
 const DashboardPage = lazy(() => import('../pages/dashboard/DashboardPage'));
 const AssessmentList = lazy(() => import('../pages/assessments/AssessmentList'));
 const CreateAssessment = lazy(() => import('../pages/assessments/CreateAssessment'));
+const EditAssessment = lazy(() => import('../pages/assessments/EditAssessment'));
+const AssessmentQuestionsList = lazy(() => import('../pages/assessments/AssessmentQuestionsList'));
 const MappingPage = lazy(() => import('../pages/mapping/MappingPage'));
+
 const PrepareAssessment = lazy(() => import('../pages/prepare/PrepareAssessment'));
 const MappingResultsPage = lazy(() => import('../pages/mapping/MappingResultsPage'));
 const MappingDetailPage = lazy(() => import('../pages/mapping/MappingDetailPage'));
@@ -35,7 +38,7 @@ export const router = createBrowserRouter([
     {
         path: '/register',
         element: (
-            <Suspense fallback={<GlobalLoader />}>
+            <Suspense fallback={<ProtectedRoute><GlobalLoader /></ProtectedRoute>}>
                 <RegisterPage />
             </Suspense>
         ),
@@ -72,6 +75,22 @@ export const router = createBrowserRouter([
                         element: (
                             <Suspense fallback={<GlobalLoader />}>
                                 <CreateAssessment />
+                            </Suspense>
+                        )
+                    },
+                    {
+                        path: ':id/edit',
+                        element: (
+                            <Suspense fallback={<GlobalLoader />}>
+                                <EditAssessment />
+                            </Suspense>
+                        )
+                    },
+                    {
+                        path: ':id/questions',
+                        element: (
+                            <Suspense fallback={<GlobalLoader />}>
+                                <AssessmentQuestionsList />
                             </Suspense>
                         )
                     }

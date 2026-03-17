@@ -9,19 +9,8 @@ const apiClient = axios.create({
     withCredentials: true, // Important for secure HTTP-only cookies (refresh token)
 });
 
-// Request interceptor to attach access token if we handle it in memory or localStorage
-// Note: If using pure http-only cookies for access token, this might be unnecessary.
-apiClient.interceptors.request.use(
-    (config) => {
-        // Optional: Get token from store/localStorage if not using HTTP-only for access token
-        const token = localStorage.getItem('accessToken');
-        if (token && config.headers) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-    },
-    (error) => Promise.reject(error)
-);
+// Request interceptor not needed since we are relying on HTTP-only cookies
+
 
 // Response interceptor for automatic token refresh
 apiClient.interceptors.response.use(
@@ -36,23 +25,16 @@ apiClient.interceptors.response.use(
             try {
                 // Call refresh token endpoint 
                 // Assumes backend relies on HTTP-only refresh token cookie to validate
-                const { data } = await axios.post(
-                    `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api'}/auth/refresh`,
+                await axios.post(
+                    `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1'}/auth/refresh`,
                     {},
                     { withCredentials: true }
                 );
 
-                // If backend returns new access token in json response
-                if (data.accessToken) {
-                    localStorage.setItem('accessToken', data.accessToken);
-                    originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
-                }
-
-                // Retry the original request
+                // Retry the original request (cookies will be automatically included)
                 return apiClient(originalRequest);
             } catch (refreshError) {
                 // If refresh fails, log user out forcefully
-                localStorage.removeItem('accessToken');
                 window.location.href = '/login';
                 return Promise.reject(refreshError);
             }

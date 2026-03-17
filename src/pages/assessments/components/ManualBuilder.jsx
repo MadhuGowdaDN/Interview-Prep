@@ -1,4 +1,5 @@
-import { Box, Button, Divider, Grid, IconButton, MenuItem, Button as MuiButton, Paper, TextField, Typography } from '@common/mui';
+import { Box, Button, Divider, Grid, IconButton, MenuItem, Button as MuiButton, Paper, TextField, Typography } from '@common';
+import { AddCircleOutlineIcon } from '@icons';
 import { FieldArray, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -110,7 +111,7 @@ const ManualBuilder = ({ initialData, onSubmit, loading, onCancel }) => {
                                                                         </IconButton>
                                                                     </Box>
                                                                 ))}
-                                                                <MuiButton size="small" startIcon={<AddCircleOutline />} onClick={() => optionHelpers.push('')} sx={{ mt: 1 }}>
+                                                                <MuiButton size="small" startIcon={<AddCircleOutlineIcon />} onClick={() => optionHelpers.push('')} sx={{ mt: 1 }}>
                                                                     Add Option
                                                                 </MuiButton>
                                                             </Box>
@@ -128,7 +129,7 @@ const ManualBuilder = ({ initialData, onSubmit, loading, onCancel }) => {
 
                                 <Button
                                     variant="outlined"
-                                    startIcon={<AddCircleOutline />}
+                                    startIcon={<AddCircleOutlineIcon />}
                                     sx={{ mt: 2, mb: 4, width: '100%', py: 1.5, borderStyle: 'dashed' }}
                                     onClick={() => push({ skill: '', question: '', options: [], correctAnswer: '', difficulty: 'easy', type: 'mcq' })}
                                 >

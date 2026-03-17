@@ -9,6 +9,7 @@ export const API_ROUTES = {
     AUTH: {
         LOGIN: getFormattedRoute('auth/login'),
         REGISTER: getFormattedRoute('auth/register'),
+        IS_USER_ACTIVE: getFormattedRoute('auth/status'),
         LOGOUT: getFormattedRoute('auth/logout'),
         REFRESH: getFormattedRoute('auth/refresh'),
     },
@@ -18,6 +19,11 @@ export const API_ROUTES = {
         CURD_ASSESSMENT: getFormattedRoute('assessments'),
         GET_ASSESSMENT_DETAILS: getFormattedRoute('assessments/:id'),
         GENERATE_ASSESSMENT_AI: getFormattedRoute('assessment-ai/generate'),
+        UPDATE_ASSESSMENT: getFormattedRoute('assessments/:id'),
+        DELETE_ASSESSMENT: getFormattedRoute('assessments/:id'),
+        ADD_QUESTION: getFormattedRoute('assessments/:id/questions'),
+        UPDATE_QUESTION: getFormattedRoute('assessments/:id/questions/:questionId'),
+        DELETE_QUESTION: getFormattedRoute('assessments/:id/questions/:questionId'),
     },
 
     ASSESSMENT_MAPPING: {// Mapping

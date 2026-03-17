@@ -1,7 +1,7 @@
-import DynamicTable from '@common/components/DynamicTable';
-import { Box, Button, IconButton, Typography } from '@common/mui';
-import { getAssessments } from '@features/assessments/assessmentSlice';
-import { AddIcon, DeleteIcon, EditIcon } from '@icons';
+import { DynamicTable } from '@common';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Tooltip, Typography } from '@common/mui';
+import { deleteAssessment, getAssessments } from '@features/assessments/assessmentSlice';
+import { AddIcon, DeleteIcon, EditIcon, ViewIcon } from '@icons';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,11 +11,29 @@ const AssessmentList = () => {
     const dispatch = useDispatch();
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
-    const { list, totalCount, loading } = useSelector((state) => state.assessments);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [selectedId, setSelectedId] = useState(null);
 
+    const { list, totalCount, loading } = useSelector((state) => state.assessments);
+    console.log("list ", list)
     useEffect(() => {
         dispatch(getAssessments({ params: { page: paginationModel.page + 1, limit: paginationModel.pageSize } }));
     }, [dispatch, paginationModel]);
+
+    const handleDeleteClick = (id) => {
+        setSelectedId(id);
+        setDeleteModalOpen(true);
+    };
+
+    const confirmDelete = async () => {
+        if (selectedId) {
+            await dispatch(deleteAssessment({ urlParams: { id: selectedId } }));
+            dispatch(getAssessments({ params: { page: paginationModel.page + 1, limit: paginationModel.pageSize } }));
+            setDeleteModalOpen(false);
+            setSelectedId(null);
+        }
+    };
+
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 90 },
@@ -26,22 +44,39 @@ const AssessmentList = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-            width: 150,
+            width: 170,
             sortable: false,
-            renderCell: (params) => (
-                <Box>
-                    <IconButton color="primary" size="small"><EditIcon fontSize="small" /></IconButton>
-                    <IconButton color="error" size="small"><DeleteIcon fontSize="small" /></IconButton>
-                </Box>
-            ),
+            renderCell: (params) => {
+                console.log("params.row ", params.row);
+                return (
+                    <Box>
+                        <Tooltip title="View Questions">
+                            <IconButton color="info" size="small" onClick={() => navigate(`/assessments/${params.row._id || params.row.id}/questions`)}>
+                                <ViewIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Edit Assessment">
+                            <IconButton color="primary" size="small" onClick={() => navigate(`/assessments/${params.row._id || params.row.id}/edit`)}>
+                                <EditIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Delete Assessment">
+                            <IconButton color="error" size="small" onClick={() => handleDeleteClick(params.row._id || params.row.id)}>
+                                <DeleteIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
+                )
+            }
         },
     ];
 
     // Mocking fallback data
-    const rows = list && list.length > 0 ? list : [
-        { id: 1, title: 'Senior Frontend Developer Role', type: 'Technical', status: 'Active', createdAt: new Date().toISOString() },
-        { id: 2, title: 'Backend Node.js Challenge', type: 'Coding', status: 'Draft', createdAt: new Date().toISOString() },
-    ];
+    const rows = (list && list.length > 0) ? list : [];
+    // : [
+    //     { id: 1, title: 'Senior Frontend Developer Role', type: 'Technical', status: 'Active', createdAt: new Date().toISOString() },
+    //     { id: 2, title: 'Backend Node.js Challenge', type: 'Coding', status: 'Draft', createdAt: new Date().toISOString() },
+    // ];
 
     return (
         <Box>
@@ -68,6 +103,17 @@ const AssessmentList = () => {
                 onPageChange={(page) => setPaginationModel(prev => ({ ...prev, page }))}
                 onPageSizeChange={(pageSize) => setPaginationModel(prev => ({ ...prev, pageSize }))}
             />
+
+            <Dialog open={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
+                <DialogTitle>Delete Assessment</DialogTitle>
+                <DialogContent>
+                    Are you sure you want to delete this assessment? This action cannot be undone.
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setDeleteModalOpen(false)} color="inherit">Cancel</Button>
+                    <Button onClick={confirmDelete} color="error" variant="contained">Delete</Button>
+                </DialogActions>
+            </Dialog>
         </Box>
     );
 };

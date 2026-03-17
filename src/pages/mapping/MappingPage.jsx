@@ -10,7 +10,7 @@ import {
     TextField,
     Typography
 } from '@common/mui';
-import { getMappings } from '@features';
+import { getMappings, startPrepareMapping } from '@features';
 import { AddIcon, FilterIcon, PlayIcon, RefreshIcon, SearchIcon, ViewIcon } from '@icons';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -71,10 +71,18 @@ const MappingPage = () => {
     };
 
     const handleStartAssessment = (row) => {
+        console.log("row ", row)
         if (row.status === 'completed') {
             navigate(`/mapping/${row.id}/results`);
-        } else if (row.status === 'pending') {
+        } else if (row.status === 'pending' || row.status === 'in_progress') {
             navigate(`/prepare?mappingId=${row.id}`);
+        } else {
+            dispatch(startPrepareMapping({ id: row.id }))?.then(res => {
+                console.log("res", res, res?.payload?.data.id)
+                if (res?.payload?.data._id) {
+                    navigate(`/prepare?mappingId=${res?.payload?.data._id}`);
+                }
+            })
         }
     };
 
@@ -135,7 +143,7 @@ const MappingPage = () => {
             width: 100,
             renderCell: (params) => {
                 if (params.row.status === 'completed') return '100%';
-                if (params.row.status === 'started') return 'In Progress';
+                if (params.row.status === 'started' || params.row.status === 'in_progress') return 'In Progress';
                 return 'Not Started';
             }
         },
@@ -156,7 +164,7 @@ const MappingPage = () => {
                         sx={{ minWidth: 90 }}
                     >
                         {params.row.status === 'completed' ? 'Results' :
-                            params.row.status === 'started' ? 'In Progress' : 'Start'}
+                            params.row.status === 'started' || params.row.status === 'in_progress' ? 'In Progress' : 'Start'}
                     </Button>
                     <IconButton
                         size="small"
@@ -183,7 +191,7 @@ const MappingPage = () => {
             questions: mapping.questions
         },
         assessmentName: mapping.assessmentId?.title || mapping.assessmentName,
-        status: mapping.status,
+        status: mapping.prepareAssessmentId?.status,
         createdAt: mapping?.createdAt,
         assignedDate: mapping?.createdAt,
         duration: mapping.assessmentId?.duration,
