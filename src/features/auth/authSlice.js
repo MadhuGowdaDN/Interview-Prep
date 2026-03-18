@@ -66,7 +66,6 @@ const authSliceConfig = {
         });
         builder.addCase(thunks.isUserLoggedIn.fulfilled, (state, action) => {
             state.loading = false;
-            console.log("action.payload?.data?.isLoggedIn ", action.payload?.data, action.payload?.data?.isLoggedIn)
             if (action.payload?.data?.isLoggedIn) {
                 state.isAuthenticated = true;
                 // localStorage.setItem('accessToken', action.payload?.data?.accessToken);

@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Grid, IconButton, MenuItem, Button as MuiButton, Paper, TextField, Typography } from '@common';
-import { AddCircleOutlineIcon } from '@icons';
+import { AddCircleOutlineIcon, DeleteOutlineIcon } from '@icons';
 import { FieldArray, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -67,7 +67,7 @@ const ManualBuilder = ({ initialData, onSubmit, loading, onCancel }) => {
                                                 Question {index + 1}
                                             </Typography>
                                             <IconButton color="error" onClick={() => remove(index)}>
-                                                <DeleteOutline />
+                                                <DeleteOutlineIcon />
                                             </IconButton>
                                         </Box>
 
@@ -107,7 +107,7 @@ const ManualBuilder = ({ initialData, onSubmit, loading, onCancel }) => {
                                                                     <Box key={optIndex} sx={{ display: 'flex', gap: 1, mb: 1 }}>
                                                                         <TextField name={`questions.${index}.options.${optIndex}`} size="small" placeholder={`Option ${optIndex + 1}`} sx={{ flexGrow: 1 }} />
                                                                         <IconButton size="small" color="error" onClick={() => optionHelpers.remove(optIndex)}>
-                                                                            <DeleteOutline fontSize="small" />
+                                                                            <DeleteOutlineIcon fontSize="small" />
                                                                         </IconButton>
                                                                     </Box>
                                                                 ))}

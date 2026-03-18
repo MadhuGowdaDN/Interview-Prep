@@ -18,12 +18,13 @@ import {
     Radio,
     RadioGroup,
     Skeleton,
+    TextField,
     Tooltip,
     Typography,
     useMediaQuery,
     useTheme
 } from '@common/mui';
-import { clearTimeData, getPrepareTime, submitAnswer, submitAssessment } from '@features/prepare/prepareSlice';
+import { clearTimeData, getAssessmentQuestionsByPrepare, getPrepareTime, submitAnswer, submitAssessment } from '@features/prepare/prepareSlice';
 import { ExitToAppIcon, FullscreenExitIcon, FullscreenIcon, NavigateBeforeIcon, NavigateNextIcon } from '@icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -101,20 +102,22 @@ const PrepareAssessment = () => {
     const [submitLoading, setSubmitLoading] = useState(false);
     const [autoSubmitTimer, setAutoSubmitTimer] = useState(null);
     // --------------------------------------------------------------------
+    const questionsData = useSelector((state) => state.prepare.questionsData?.data) || [];
     // Questions – replace with real data from API (timeData.questions)
-    const questions = MOCK_QUESTIONS; // TODO: use timeData.questions when available
+    const questions = questionsData; // TODO: use timeData.questions when available
     const currentQuestion = questions[currentQuestionIndex];
     const totalQuestions = questions.length;
     const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
     // Timer reference for cleanup
     const timerRef = useRef(null);
-
+    console.log("questionsData ", questionsData)
     // --------------------------------------------------------------------
     // Initial data fetch
     useEffect(() => {
         if (!mappingId) return;
 
-        dispatch(getPrepareTime({ id: mappingId }));
+        dispatch(getAssessmentQuestionsByPrepare({ urlParams: { mappingId } }));
+
         dispatch(getPrepareTime({ id: mappingId }))
             .unwrap()
             .catch((err) => console.error('Failed to load exam:', err));
@@ -362,36 +365,71 @@ const PrepareAssessment = () => {
                                 Question {currentQuestionIndex + 1}
                             </Typography>
                             <Typography variant="h5" fontWeight={600} sx={{ mt: 1, mb: 4 }}>
-                                {currentQuestion.text}
+                                {currentQuestion.question}
                             </Typography>
 
-                            <RadioGroup value={selectedAnswer} onChange={handleAnswerChange}>
-                                {currentQuestion.options.map((option, idx) => (
-                                    <Paper
-                                        key={idx}
-                                        variant="outlined"
-                                        sx={{
-                                            mb: 2,
-                                            p: 1,
-                                            px: 2,
-                                            borderColor: selectedAnswer === option ? 'primary.main' : 'divider',
-                                            backgroundColor: selectedAnswer === option ? 'action.selected' : 'transparent',
-                                            transition: 'all 0.2s',
-                                            '&:hover': {
-                                                borderColor: 'primary.main',
-                                                backgroundColor: 'action.hover',
-                                            },
-                                        }}
-                                    >
-                                        <FormControlLabel
-                                            value={option}
-                                            control={<Radio />}
-                                            label={option}
-                                            sx={{ width: '100%', m: 0 }}
-                                        />
-                                    </Paper>
-                                ))}
-                            </RadioGroup>
+                            {currentQuestion.type === 'text' && (
+                                <TextField
+                                    fullWidth
+                                    multiline
+                                    rows={4}
+                                    variant="outlined"
+                                    placeholder="Type your answer here..."
+                                    value={selectedAnswer}
+                                    onChange={handleAnswerChange}
+                                    sx={{ mb: 2 }}
+                                />
+                            )}
+                            {currentQuestion.type === 'coding' && (
+                                <TextField
+                                    fullWidth
+                                    multiline
+                                    rows={10}
+                                    variant="outlined"
+                                    placeholder="Write your code here..."
+                                    value={selectedAnswer}
+                                    onChange={handleAnswerChange}
+                                    sx={{
+                                        mb: 2,
+                                        '& .MuiInputBase-input': {
+                                            fontFamily: 'monospace',
+                                            fontSize: '0.9rem',
+                                        },
+                                        '& .MuiOutlinedInput-root': {
+                                            backgroundColor: theme.palette.mode === 'dark' ? '#1e1e1e' : '#f5f5f5',
+                                        }
+                                    }}
+                                />
+                            )}
+                            {(!currentQuestion.type || currentQuestion.type === 'mcq') && (
+                                <RadioGroup value={selectedAnswer} onChange={handleAnswerChange}>
+                                    {currentQuestion.options?.map((option, idx) => (
+                                        <Paper
+                                            key={idx}
+                                            variant="outlined"
+                                            sx={{
+                                                mb: 2,
+                                                p: 1,
+                                                px: 2,
+                                                borderColor: selectedAnswer === option ? 'primary.main' : 'divider',
+                                                backgroundColor: selectedAnswer === option ? 'action.selected' : 'transparent',
+                                                transition: 'all 0.2s',
+                                                '&:hover': {
+                                                    borderColor: 'primary.main',
+                                                    backgroundColor: 'action.hover',
+                                                },
+                                            }}
+                                        >
+                                            <FormControlLabel
+                                                value={option}
+                                                control={<Radio />}
+                                                label={option}
+                                                sx={{ width: '100%', m: 0 }}
+                                            />
+                                        </Paper>
+                                    ))}
+                                </RadioGroup>
+                            )}
 
                             <Divider sx={{ my: 3 }} />
 

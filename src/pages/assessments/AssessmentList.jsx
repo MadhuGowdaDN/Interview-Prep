@@ -15,7 +15,6 @@ const AssessmentList = () => {
     const [selectedId, setSelectedId] = useState(null);
 
     const { list, totalCount, loading } = useSelector((state) => state.assessments);
-    console.log("list ", list)
     useEffect(() => {
         dispatch(getAssessments({ params: { page: paginationModel.page + 1, limit: paginationModel.pageSize } }));
     }, [dispatch, paginationModel]);

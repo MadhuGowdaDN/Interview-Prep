@@ -74,9 +74,9 @@ const assessmentSliceConfig = {
             if (action.payload?.items) {
                 state.list = action.payload.items;
                 state.totalCount = action.payload.total || action.payload.items.length;
-            } else if (Array.isArray(action.payload)) {
-                state.list = action.payload;
-                state.totalCount = action.payload.length;
+            } else if (Array.isArray(action.payload?.data)) {
+                state.list = action.payload?.data;
+                state.totalCount = action.payload?.data.length;
             }
         });
     }

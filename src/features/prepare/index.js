@@ -1,2 +1,2 @@
-export { clearError, clearSuccess, clearTimeData, getPrepareTime, submitAnswer, submitAssessment } from "./prepareSlice";
+export { clearError, clearSuccess, clearTimeData, getAssessmentQuestionsByPrepare, getPrepareTime, submitAnswer, submitAssessment } from "./prepareSlice";
 

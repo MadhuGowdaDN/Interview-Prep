@@ -60,6 +60,7 @@ const DynamicTable = ({
                     },
                 }}
                 getRowHeight={() => 'auto'}
+                getRowId={(row) => row._id || row.id}
                 {...props}
             />
         </Paper>

@@ -37,5 +37,6 @@ export const API_ROUTES = {
         GET_PREPARE_TIME: getFormattedRoute('prepare-assessments/fetch-time'),
         SUBMIT_PREPARE_ANSWER: getFormattedRoute('prepare-assessments/answer'),
         SUBMIT_PREPARE_ASSESSMENT: getFormattedRoute('prepare-assessments/submit'),
+        GET_ASSESSMENT_QUESTIONS_BY_PREPARE: getFormattedRoute('prepare-assessments/questions/:mappingId'),
     },
 };

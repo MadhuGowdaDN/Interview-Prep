@@ -1,6 +1,14 @@
-import { Box, Button, Card, CardActions, CardContent, Chip, CircularProgress, IconButton, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from '@common/mui';
-import { addQuestion, deleteQuestion, getAssessmentById, updateQuestion, clearCurrentAssessment } from '@features/assessments/assessmentSlice';
-import { AddIcon, DeleteIcon, EditIcon, ArrowBackIcon } from '@icons';
+import {
+    Box, Button, Card, CardActions, CardContent, Chip, CircularProgress,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Grid,
+    IconButton, Typography
+} from '@common';
+import { addQuestion, clearCurrentAssessment, deleteQuestion, getAssessmentById, updateQuestion } from '@features/assessments/assessmentSlice';
+import { AddIcon, ArrowBackIcon, DeleteIcon, EditIcon } from '@icons';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,7 +19,7 @@ const AssessmentQuestionsList = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { details, loading } = useSelector((state) => state.assessments);
-    
+
     const assessmentDetails = details?.data || details;
 
     const [modalOpen, setModalOpen] = useState(false);
@@ -42,14 +50,14 @@ const AssessmentQuestionsList = () => {
     const handleFormSubmit = async (values) => {
         let action;
         if (editingQuestion) {
-            action = await dispatch(updateQuestion({ 
-                urlParams: { id, questionId: editingQuestion._id || editingQuestion.id }, 
-                body: values 
+            action = await dispatch(updateQuestion({
+                urlParams: { id, questionId: editingQuestion._id || editingQuestion.id },
+                body: values
             }));
         } else {
-            action = await dispatch(addQuestion({ 
-                urlParams: { id }, 
-                body: values 
+            action = await dispatch(addQuestion({
+                urlParams: { id },
+                body: values
             }));
         }
 

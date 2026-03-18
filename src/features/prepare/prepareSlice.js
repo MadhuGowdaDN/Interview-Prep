@@ -2,12 +2,14 @@ import { createDynamicSlice } from '@common/utils/createDynamicSlice';
 import { API_ROUTES } from '@constants';
 const { GET_PREPARE_TIME,
     SUBMIT_PREPARE_ANSWER,
-    SUBMIT_PREPARE_ASSESSMENT, } = API_ROUTES.PREPARE_ASSESSMENT;
+    SUBMIT_PREPARE_ASSESSMENT,
+    GET_ASSESSMENT_QUESTIONS_BY_PREPARE } = API_ROUTES.PREPARE_ASSESSMENT;
 
 const prepareSliceConfig = {
     name: 'prepare',
     initialState: {
         timeData: null,
+        questionsData: [],
     },
     asyncThunks: [
         {
@@ -15,6 +17,12 @@ const prepareSliceConfig = {
             method: 'get',
             url: GET_PREPARE_TIME,
             storeKey: 'timeData',
+        },
+        {
+            name: 'getAssessmentQuestionsByPrepare',
+            method: 'get',
+            url: GET_ASSESSMENT_QUESTIONS_BY_PREPARE,
+            storeKey: 'questionsData',
         },
         {
             name: 'submitAnswer',
@@ -36,6 +44,6 @@ const prepareSliceConfig = {
 
 const { reducer, thunks, actions } = createDynamicSlice(prepareSliceConfig);
 
-export const { getPrepareTime, submitAnswer, submitAssessment } = thunks;
+export const { getPrepareTime, submitAnswer, submitAssessment, getAssessmentQuestionsByPrepare } = thunks;
 export const { clearTimeData, clearError, clearSuccess } = actions;
 export default reducer;
